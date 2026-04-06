@@ -45,35 +45,36 @@ function HomePage() {
         });
     }, [watches, searchTerm]);
 
-    if (loading) return <p>Chargement...</p>;
-    if (error) return <p>{error}</p>;
+    if (loading) return <p className="section">Chargement...</p>;
+    if (error) return <p className="section">{error}</p>;
 
     return (
-        <div style={{ padding: "20px" }}>
-            <h1>Vintage Watch DB</h1>
+        <section className="section">
+            <div className="container">
+                <h1 className="title">Vintage Watch DB</h1>
+                <p className="subtitle">Base de données de montres vintage</p>
 
-            <input
-                type="text"
-                placeholder="Rechercher une marque, un modèle ou une référence..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{
-                    padding: "10px",
-                    width: "100%",
-                    maxWidth: "500px",
-                    marginBottom: "20px",
-                    fontSize: "16px"
-                }}
-            />
+                <div className="field">
+                    <div className="control">
+                        <input
+                            className="input"
+                            type="text"
+                            placeholder="Rechercher une marque, un modèle ou une référence..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                    </div>
+                </div>
 
-            <p>{filteredWatches.length} montre(s) trouvée(s)</p>
+                <p className="mb-4">{filteredWatches.length} montre(s) trouvée(s)</p>
 
-            {filteredWatches.length === 0 ? (
-                <p>Aucune montre ne correspond à la recherche.</p>
-            ) : (
-                <WatchList watches={filteredWatches} />
-            )}
-        </div>
+                {filteredWatches.length === 0 ? (
+                    <p>Aucune montre ne correspond à la recherche.</p>
+                ) : (
+                    <WatchList watches={filteredWatches} />
+                )}
+            </div>
+        </section>
     );
 }
 

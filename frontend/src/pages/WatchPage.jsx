@@ -25,37 +25,115 @@ function WatchPage() {
             });
     }, [id]);
 
-    if (loading) return <p>Chargement...</p>;
-    if (error) return <p>{error}</p>;
-    if (!watch) return <p>Montre introuvable.</p>;
+    if (loading) {
+        return (
+            <section className="section">
+                <div className="container">
+                    <p>Chargement...</p>
+                </div>
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section className="section">
+                <div className="container">
+                    <p>{error}</p>
+                </div>
+            </section>
+        );
+    }
+
+    if (!watch) {
+        return (
+            <section className="section">
+                <div className="container">
+                    <p>Montre introuvable.</p>
+                </div>
+            </section>
+        );
+    }
 
     return (
-        <div style={{ padding: "20px" }}>
-            <Link to="/">← Retour à la liste</Link>
+        <section className="section">
+            <div className="container">
+                <div className="mb-5">
+                    <Link to="/" className="button is-light">
+                        ← Retour à la liste
+                    </Link>
+                </div>
 
-            <h1>
-                {watch.brand} {watch.model}
-            </h1>
+                <div className="card">
+                    <div className="card-content">
+                        <h1 className="title">
+                            {watch.brand} {watch.model}
+                        </h1>
 
-            <p>
-                <strong>Référence :</strong> {watch.reference}
-            </p>
-            <p>
-                <strong>Années :</strong> {watch.year_start} - {watch.year_end}
-            </p>
-            <p>
-                <strong>Calibre :</strong> {watch.caliber}
-            </p>
-            <p>
-                <strong>Diamètre :</strong> {watch.diameter_mm} mm
-            </p>
-            <p>
-                <strong>Mouvement :</strong> {watch.movement_type}
-            </p>
-            <p>
-                <strong>Description :</strong> {watch.description}
-            </p>
-        </div>
+                        <h2 className="subtitle">
+                            Référence {watch.reference}
+                        </h2>
+
+                        <div className="columns is-multiline">
+                            <div className="column is-half">
+                                <p>
+                                    <strong>Marque :</strong> {watch.brand}
+                                </p>
+                            </div>
+
+                            <div className="column is-half">
+                                <p>
+                                    <strong>Modèle :</strong> {watch.model}
+                                </p>
+                            </div>
+
+                            <div className="column is-half">
+                                <p>
+                                    <strong>Référence :</strong> {watch.reference}
+                                </p>
+                            </div>
+
+                            <div className="column is-half">
+                                <p>
+                                    <strong>Calibre :</strong> {watch.caliber || "Non renseigné"}
+                                </p>
+                            </div>
+
+                            <div className="column is-half">
+                                <p>
+                                    <strong>Année début :</strong> {watch.year_start || "Non renseignée"}
+                                </p>
+                            </div>
+
+                            <div className="column is-half">
+                                <p>
+                                    <strong>Année fin :</strong> {watch.year_end || "Non renseignée"}
+                                </p>
+                            </div>
+
+                            <div className="column is-half">
+                                <p>
+                                    <strong>Diamètre :</strong> {watch.diameter_mm ? `${watch.diameter_mm} mm` : "Non renseigné"}
+                                </p>
+                            </div>
+
+                            <div className="column is-half">
+                                <p>
+                                    <strong>Mouvement :</strong> {watch.movement_type || "Non renseigné"}
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div className="content">
+                            <p className="has-text-weight-semibold">Description</p>
+                            <p>{watch.description || "Aucune description disponible."}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 }
 

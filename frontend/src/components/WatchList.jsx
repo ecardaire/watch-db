@@ -2,11 +2,13 @@ import WatchItem from "./WatchItem";
 
 function WatchList({ watches }) {
     return (
-        <ul>
+        <div className="columns is-multiline">
             {watches.map((watch) => (
-                <WatchItem key={watch.id} watch={watch} />
+                <div className="column is-half" key={watch.id}>
+                    <WatchItem watch={watch} />
+                </div>
             ))}
-        </ul>
+        </div>
     );
 }
 
